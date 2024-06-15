@@ -6,7 +6,7 @@ programa {
   cadeia busca, enter  //variaveis de leitura
   caracter opcao       //variaveis de leitura
   inteiro total = 0, ponteiro = 0, i = 0, ponteiro_consertados = 0, porcentagem_consertados = 0, porcentagem_manutencao = 0
-  real preco[quant]    //variavel para preço do serviço dos itens consertados
+  real preco[quant], soma    //variavel para preço do serviço dos itens consertados
   logico encontrado = falso
 
   funcao inicio() //limpa tela e chama funcao menu
@@ -194,7 +194,7 @@ programa {
         {
           se(equipamento[i]==busca)
           {
-            escreva(equipamento[i],"(Defeito Relatado: ",defeito[i],") - ",data_entrada[i],"- Proprietario: ",nome_proprietario[i],"\n")
+            escreva((i+1)," - ",equipamento[i],"(Defeito Relatado: ",defeito[i],") - ",data_entrada[i],"- Proprietario: ",nome_proprietario[i],"\n")
             encontrado = verdadeiro
           }
         }
@@ -248,6 +248,7 @@ programa {
   funcao equipamentos_consertados()//lista equipamentos prontos
     {
       limpa()
+      soma = 0
       se(ponteiro_consertados==0)
       {
         escreva("Não há itens na lista de equipamentos prontos!")
@@ -256,10 +257,12 @@ programa {
       {
         para(i=0;i<ponteiro_consertados;i++)
         {
-          escreva((i+1)," - ",equipamento_consertado[i]," - Responsavel Manutenção: ",nome_profissional[i]," - ",data_conserto[i],"- Proprietario: ",nome_dono[i],"\n")
+          escreva((i+1)," - ",equipamento_consertado[i]," - Responsavel Manutenção: ",nome_profissional[i]," - ",data_conserto[i],"- Proprietario: ",nome_dono[i]," - Valor: R$",preco[i],"\n")
+          soma += preco[i]
           U.aguarde(100)
         }
       }
+      escreva("\nValor total dos serviços: R$",soma)
       retorna()
     }
 
